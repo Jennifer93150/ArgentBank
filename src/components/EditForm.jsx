@@ -16,35 +16,34 @@ export function EditForm() {
   const firstname = useSelector((state) => state.userInfo.firstName);
   const lastname = useSelector((state) => state.userInfo.lastName);
   const [clicSaveButton, setClicSaveButton] = useState(false);
+  const url = "http://localhost:3001/api/v1/user/profile";
 
   const handleSubmit = (event)=>{
     event.preventDefault();
-    const url = "http://localhost:3001/api/v1/user/profile";
-  
     // Send PUT request:
     fetch(url, {
       method: 'PUT',
       headers: { 
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
       },
       body: JSON.stringify({
-        //if empty value retrieve old value
-        firstName: !event.target.firstname.value ? firstname : event.target.firstname.value,
-        lastName: !event.target.lastname.value ? lastname : event.target.lastname.value
+      //if empty value retrieve old value
+      firstName: !event.target.firstname.value ? firstname : event.target.firstname.value,
+      lastName: !event.target.lastname.value ? lastname : event.target.lastname.value
       }),
 
     })
-      .then(function(res) {
+    .then(function(res) {
         return res.json()
-        .then(function(value) {
-          store.dispatch(setUserInfo(value.body));
-          setClicSaveButton(true);
-        })
-        .catch(function(err) {
-          console.log(err)
-        });
-      })
+    .then(function(value) {
+        store.dispatch(setUserInfo(value.body));
+        setClicSaveButton(true);
+    })
+    .catch(function(err) {
+        console.log(err)
+    });
+    })
   }
 
   const handleReset = (event) => {
@@ -55,13 +54,11 @@ export function EditForm() {
   
   return (
     <div>
-      {/* <Navbar/> */}
       {/* if click on edit button displays the form */}
        {clicSaveButton ? (
         <ButtonEditName />
        ) : ( // otherwise displays the name and edit button
         <div className="header">
-
           <h1>Welcome back</h1>
             <form onSubmit={handleSubmit} onReset={handleReset}>
                 <div className="wrapper-edit">

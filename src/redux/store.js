@@ -2,6 +2,9 @@ import { createStore} from "https://cdn.skypack.dev/redux@4.0.5";
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
  
+/**
+ * State
+ */
 const initialState = {
   userLoginInfo:{
     email: "",
@@ -12,19 +15,17 @@ const initialState = {
     lastName: "",
     id: "",
   },
-  loading: true,
-  connected: false,
-  token:"",
+  token: null,
 };
 
-export const setToken = (value) => ({ 
+export const setToken = (token) => ({ 
   type: "setToken",
-  payload: value,
+  payload: token,
 });
 
-export const setUserInfo = (value) => ({ 
+export const setUserInfo = (userInfo) => ({ 
   type: "setUserInfo",
-  payload: value,
+  payload: userInfo,
 });
 
 export const emptyState = () => ({ 
@@ -35,14 +36,17 @@ export const removeStorage = () => ({
   type: "removeStorage",
 });
 
-
+/**
+ * Reducer
+ * @param {object} state 
+ * @param {string} action 
+ * @returns {object}
+ */
 export function reducer(state = initialState, action) {
   
   if (action.type === 'setToken') {
       return{
         ...state,
-        loading: false,
-        connected: true, 
         token: action.payload,
     }
   }
@@ -72,8 +76,6 @@ export function reducer(state = initialState, action) {
         lastName: "",
         id: "",
       },
-      loading: true,
-      connected: false,
       token:"",
     }
     

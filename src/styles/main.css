@@ -15,6 +15,7 @@ body {
 
 .main {
   flex: 1;
+  padding: 50px;
 }
 
 .bg-dark {
@@ -188,7 +189,6 @@ body {
   background-color: white;
   width: 300px;
   margin: 0 auto;
-  margin-top: 3rem;
   padding: 2rem;
 }
 
@@ -332,5 +332,13 @@ body {
 
   .transaction-button {
     width: 200px;
+  }
+}
+
+@media (min-width: 425px) {
+  .account-amount {
+    margin: 0;
+    font-size: 2.5rem;
+    font-weight: bold;
   }
 }

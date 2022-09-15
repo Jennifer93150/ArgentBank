@@ -1,15 +1,14 @@
 import React from 'react';
 import {
   BrowserRouter,
-  Navigate,
   Routes,
   Route,
+  Navigate,
 } from "react-router-dom";
 import { createRoot } from 'react-dom/client';
 import { PersistGate } from 'redux-persist/integration/react'
 import { Provider } from "react-redux";
 import { store , persistor, setToken } from "../src/redux/store";
-import storage from 'redux-persist/lib/storage';
 
 import reportWebVitals from './reportWebVitals';
 
@@ -21,10 +20,8 @@ import { User } from './pages/User';
 const token = store.getState().token; 
 
 if (token) { 
-  console.log('rechgt page ')
   store.dispatch(setToken(token)); 
 }
-
 
 const container = document.getElementById('root');
 const root = createRoot(container);
@@ -34,8 +31,8 @@ root.render(
         <PersistGate loading={null} persistor={persistor}>
           <Routes>
             <Route exact path="/" index element={<Home/>}/>
-            <Route exact path="/login" element={<Login/>}/>
-            <Route exact path="/user" element={<User/>}/> 
+            <Route path="/login" element={<Login/>}/>
+            <Route path="/user" element={<User/>}/> 
             
             {/* <Route exact path="*" element={<Error />}/> */}
           </Routes>

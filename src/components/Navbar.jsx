@@ -15,7 +15,7 @@ import Logo from "../assets/argentBankLogo.png";
 export function Navbar() {
   
   const userFirstName = useSelector((state) => state.userInfo.firstName);
-  const userConnected = useSelector((state) => state.connected);
+  const token = useSelector((state) => state.token);
 
   const handleClick = () => {
     store.dispatch(emptyState('emptyState'));
@@ -29,10 +29,10 @@ export function Navbar() {
             <img className="main-nav-logo-image" src={Logo} alt="Argent Bank Logo"/>
             <h1 className="sr-only">Argent Bank</h1>
           </Link>
-          {userConnected ? (
+          {token ? (
             <div className="username">
-              <p><i className="fa-solid fa-user"></i>{userFirstName}</p>
-              <Link to="/" onClick={handleClick}><FaUserCircle className="fausercircle"/><FiLogOut className="fausercircle"/>Logout</Link>
+              <FaUserCircle className="fausercircle"/><p><i className="fa-solid fa-user"></i>{userFirstName}</p>
+              <Link to="/" onClick={handleClick}><FiLogOut className="fausercircle"/>Logout</Link>
             </div>
           ) : (
             <Link to="/login"><FaUserCircle className="fausercircle"/>Sign In</Link>
